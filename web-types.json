@@ -1,0 +1,115 @@
+{
+  "framework": "vue",
+  "name": "suspend-ball-chat-ts",
+  "version": "2.0.5",
+  "contributions": {
+    "html": {
+      "description-markup": "markdown",
+      "types-syntax": "typescript",
+      "tags": [
+        {
+          "name": "chat-panel",
+          "description": "",
+          "attributes": [
+            {
+              "name": "locales",
+              "value": {
+                "kind": "expression",
+                "type": "union"
+              },
+              "default": "'zh-CN'"
+            },
+            {
+              "name": "options",
+              "value": {
+                "kind": "expression",
+                "type": "TSTypeReference"
+              },
+              "default": "() => DEFAULT_DATE_TIME_FORMAT"
+            },
+            {
+              "name": "url",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "'http://localhost:8081/api/chat/v1/completion'"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default"
+            }
+          ],
+          "source": {
+            "module": "./components/chat-panel/ChatPanel.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "chat-panel",
+          "description": "",
+          "attributes": [
+            {
+              "name": "locales",
+              "value": {
+                "kind": "expression",
+                "type": "union"
+              },
+              "default": "'zh-CN'"
+            },
+            {
+              "name": "options",
+              "value": {
+                "kind": "expression",
+                "type": "TSTypeReference"
+              },
+              "default": "() => DEFAULT_DATE_TIME_FORMAT"
+            },
+            {
+              "name": "url",
+              "value": {
+                "kind": "expression",
+                "type": "string"
+              },
+              "default": "'http://localhost:8081/api/chat/v1/completion'"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default"
+            }
+          ],
+          "source": {
+            "module": "./components/chat-panel/index.ts",
+            "symbol": "ChatPanel"
+          }
+        },
+        {
+          "name": "components",
+          "description": "",
+          "source": {
+            "module": "./components/index.ts",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "suspend-ball-chat",
+          "description": "",
+          "source": {
+            "module": "./components/suspend-ball-chat/SuspendBallChat.vue",
+            "symbol": "default"
+          }
+        },
+        {
+          "name": "suspend-ball-chat",
+          "description": "",
+          "source": {
+            "module": "./components/suspend-ball-chat/index.ts",
+            "symbol": "SuspendBallChat"
+          }
+        }
+      ]
+    }
+  }
+}
