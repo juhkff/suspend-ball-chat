@@ -9,7 +9,7 @@
     "mock-server": "node ./src/mock/mock-server.ts",
     "package": "rimraf ./lib && npm run build && npm run build:components && npm run generate-web-types"
   },
-  "description": "一个悬浮球聊天组件库",
+  "description": "一个悬浮球AI助手组件库",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "web-types": "web-types.json",
