@@ -11,9 +11,6 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      suspend-ball-chat-ts:
-        specifier: ^2.0.3
-        version: 2.0.3(element-ui@2.15.14(vue@2.7.16))
       vue:
         specifier: ^2.7.16
         version: 2.7.16
@@ -3106,11 +3103,6 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
-
-  suspend-ball-chat-ts@2.0.3:
-    resolution: {integrity: sha512-I5MVkGu0Ufyc58h7KFIYpOdunAth48IUBhnyx93G/uIrjrU2TUPQAqtbV7bcopbI0PJFdrtnoP3JAq19cdWL+Q==}
-    peerDependencies:
-      element-ui: ^2.15.14
 
   svgo@2.8.0:
     resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
@@ -6697,15 +6689,6 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
-
-  suspend-ball-chat-ts@2.0.3(element-ui@2.15.14(vue@2.7.16)):
-    dependencies:
-      element-ui: 2.15.14(vue@2.7.16)
-      lodash: 4.17.21
-      vue: 2.7.16
-      vue-class-component: 7.2.6(vue@2.7.16)
-      vue-property-decorator: 9.1.2(vue-class-component@7.2.6(vue@2.7.16))(vue@2.7.16)
-      vuex: 3.6.2(vue@2.7.16)
 
   svgo@2.8.0:
     dependencies:

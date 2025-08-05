@@ -1,12 +1,12 @@
 {
   "framework": "vue",
-  "name": "suspend-ball-chat-ts",
-  "version": "2.0.5",
+  "name": "suspend-ball-chat",
+  "version": "1.0.0",
+  "description-markup": "markdown",
+  "js-types-syntax": "typescript",
   "contributions": {
     "html": {
-      "description-markup": "markdown",
-      "types-syntax": "typescript",
-      "tags": [
+      "elements": [
         {
           "name": "chat-panel",
           "description": "",
