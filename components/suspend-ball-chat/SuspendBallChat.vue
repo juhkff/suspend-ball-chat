@@ -2,17 +2,13 @@
   <div>
     <!-- 悬浮球 -->
     <div class="chat-bubble" ref="floatingBall" :style="{ left: ballLeft + 'px', top: ballTop + 'px' }"
-      @mousedown="handleMouseDown">
-      <img
-        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E"
-        alt="ai助手" />
+         @mousedown="handleMouseDown">
+      <img src="/icons/ai-assistant.svg" alt="ai助手"/>
     </div>
     <!-- 菜单 -->
-    <div class="menu" id="chatContainer" v-if="isMenuVisible" :style="{ left: menuLeft + 'px', top: menuTop + 'px' }"
-      style="display: flex;flex-direction: column-reverse; overflow: auto;">
-
-      <!--  Dify ai智能体地址-图中红线框起来的地方 -->
-      <chat-panel />
+    <div class="menu" v-if="isMenuVisible"
+         :style="{ left: (menuLeft-10) + 'px', top: menuTop + 'px' }">
+      <chat-panel/>
     </div>
   </div>
 </template>
@@ -29,8 +25,8 @@ import ChatPanel from "../chat-panel";
   },
 })
 export default class SuspendBallChat extends Vue {
-  private ballLeft: number = window.innerWidth - 80; // 初始位置
-  private ballTop: number = window.innerHeight - 120;
+  private ballLeft: number = window.innerWidth - 60; // 初始位置
+  private ballTop: number = window.innerHeight - 60;
   private isDragging: boolean = false;
   private startX: number = 0;
   private startY: number = 0;
@@ -43,6 +39,39 @@ export default class SuspendBallChat extends Vue {
   private menuWidth: number = 350;
   private menuHeight: number = 500;
   private minEdgeDistance: number = 10; // 距离边缘最小距离
+
+  mounted() {
+    window.addEventListener("resize", this.handleWindowResize);
+  }
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleWindowResize);
+  }
+
+  private handleWindowResize(): void {
+    // 重新计算悬浮球位置，确保不会超出边界
+    this.ballLeft = Math.max(
+        this.minEdgeDistance,
+        Math.min(this.ballLeft, window.innerWidth - 60 - this.minEdgeDistance)
+    );
+    this.ballTop = Math.max(
+        this.minEdgeDistance,
+        Math.min(this.ballTop, window.innerHeight - 60 - this.minEdgeDistance)
+    );
+    // 如果菜单可见，重新计算菜单位置
+    if (this.isMenuVisible) {
+      this.updateMenuPosition();
+    }
+    // 应用吸壁效果
+    this.applyMagneticEffect();
+  }
+
+  private applyMagneticEffect(): void {
+    // 应用吸壁效果，考虑最小边缘距离
+    this.ballLeft = this.ballLeft < window.innerWidth / 2
+        ? this.minEdgeDistance
+        : window.innerWidth - 60 - this.minEdgeDistance;
+  }
 
   handleMouseDown(event: MouseEvent) {
     event.preventDefault();
@@ -66,12 +95,12 @@ export default class SuspendBallChat extends Vue {
       this.ballTop = this.offsetY + dy;
       // 边界处理，考虑最小边缘距离
       this.ballLeft = Math.max(
-        this.minEdgeDistance,
-        Math.min(this.ballLeft, window.innerWidth - 60 - this.minEdgeDistance)
+          this.minEdgeDistance,
+          Math.min(this.ballLeft, window.innerWidth - 60 - this.minEdgeDistance)
       );
       this.ballTop = Math.max(
-        this.minEdgeDistance,
-        Math.min(this.ballTop, window.innerHeight - 60 - this.minEdgeDistance)
+          this.minEdgeDistance,
+          Math.min(this.ballTop, window.innerHeight - 60 - this.minEdgeDistance)
       );
 
       // 更新菜单位置
@@ -95,9 +124,9 @@ export default class SuspendBallChat extends Vue {
     }
     // 吸壁效果，考虑最小边缘距离
     const targetLeft =
-      this.ballLeft < window.innerWidth / 2
-        ? this.minEdgeDistance
-        : window.innerWidth - 60 - this.minEdgeDistance;
+        this.ballLeft < window.innerWidth / 2
+            ? this.minEdgeDistance
+            : window.innerWidth - 60 - this.minEdgeDistance;
 
     // 添加过渡效果
     const ball = this.$refs.floatingBall as HTMLElement;
@@ -120,8 +149,8 @@ export default class SuspendBallChat extends Vue {
     let left = 0;
     let top = 0;
     if (
-      this.ballLeft + this.menuWidth >
-      window.innerWidth - this.minEdgeDistance
+        this.ballLeft + this.menuWidth >
+        window.innerWidth - this.minEdgeDistance
     ) {
       // 悬浮球在右边，菜单显示在左边
       left = this.ballLeft - this.menuWidth;
@@ -131,13 +160,13 @@ export default class SuspendBallChat extends Vue {
     }
     // 处理垂直方向菜单超出屏幕的情况
     if (
-      this.ballTop + this.menuHeight >
-      window.innerHeight - this.minEdgeDistance
+        this.ballTop + this.menuHeight >
+        window.innerHeight - this.minEdgeDistance
     ) {
       // 若菜单底部超出屏幕，将菜单向上偏移
       top = Math.max(
-        this.minEdgeDistance,
-        window.innerHeight - this.menuHeight - this.minEdgeDistance
+          this.minEdgeDistance,
+          window.innerHeight - this.menuHeight - this.minEdgeDistance
       );
     } else {
       top = this.ballTop;
@@ -151,11 +180,9 @@ export default class SuspendBallChat extends Vue {
 <style scoped>
 .chat-bubble {
   position: fixed;
-  bottom: 60px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background-color: #15dbf5;
+  width: 50px;
+  height: 50px;
+  background-color: #d1f2ff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -174,10 +201,14 @@ export default class SuspendBallChat extends Vue {
 }
 
 .menu {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
   position: fixed;
   width: 350px;
   height: 500px;
-  background: white;
+  resize: both;
+  background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 9999;
