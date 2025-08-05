@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'lib'),
-        publicPath: '/lib/',
+        publicPath: '',
         filename: 'components/[name]/index.js',  // 输出文件名
         library: '[name]', // 组件库名称
         libraryTarget: 'umd',  //模块化格式
@@ -57,7 +57,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]',
+                    name: 'icons/[name].[ext]',
                     esModule: false,
                 }
             },

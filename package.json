@@ -1,6 +1,6 @@
 {
   "name": "suspend-ball-chat-ts",
-  "version": "2.0.8",
+  "version": "2.0.13",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "webpack",
@@ -15,7 +15,6 @@
   "web-types": "web-types.json",
   "files": [
     "lib",
-    "public",
     "components",
     "src",
     "types",

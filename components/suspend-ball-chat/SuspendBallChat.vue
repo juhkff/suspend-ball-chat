@@ -3,7 +3,13 @@
     <!-- 悬浮球 -->
     <div class="chat-bubble" ref="floatingBall" :style="{ left: ballLeft + 'px', top: ballTop + 'px' }"
          @mousedown="handleMouseDown">
-      <img src="/icons/ai-assistant.svg" alt="ai助手"/>
+      <!--   TODO   <img :src="aiAssistantIcon" alt="ai助手"/>-->
+      <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+           width="200" height="200">
+        <path
+            d="M717.12 274H762c82.842 0 150 67.158 150 150v200c0 82.842-67.158 150-150 150H262c-82.842 0-150-67.158-150-150V424c0-82.842 67.158-150 150-150h44.88l-18.268-109.602c-4.086-24.514 12.476-47.7 36.99-51.786 24.514-4.086 47.7 12.476 51.786 36.99l20 120c0.246 1.472 0.416 2.94 0.516 4.398h228.192c0.1-1.46 0.27-2.926 0.516-4.398l20-120c4.086-24.514 27.272-41.076 51.786-36.99 24.514 4.086 41.076 27.272 36.99 51.786L717.12 274zM308 484v40c0 24.852 20.148 45 45 45S398 548.852 398 524v-40c0-24.852-20.148-45-45-45S308 459.148 308 484z m318 0v40c0 24.852 20.148 45 45 45S716 548.852 716 524v-40c0-24.852-20.148-45-45-45S626 459.148 626 484zM312 912c-24.852 0-45-20.148-45-45S287.148 822 312 822h400c24.852 0 45 20.148 45 45S736.852 912 712 912H312z"
+            fill="#13227a"/>
+      </svg>
     </div>
     <!-- 菜单 -->
     <div class="menu" v-if="isMenuVisible"
@@ -17,6 +23,7 @@
 import Component from "vue-class-component";
 import Vue from "vue";
 import ChatPanel from "../chat-panel";
+import aiAssistantIcon from "@/icons/ai-assistant.svg"; // AI助手图标路径
 
 @Component({
   name: "suspend-ball-chat",
@@ -25,6 +32,7 @@ import ChatPanel from "../chat-panel";
   },
 })
 export default class SuspendBallChat extends Vue {
+  private aiAssistantIcon: string = aiAssistantIcon; // AI助手图标路径
   private ballLeft: number = window.innerWidth - 60; // 初始位置
   private ballTop: number = window.innerHeight - 60;
   private isDragging: boolean = false;
@@ -194,7 +202,7 @@ export default class SuspendBallChat extends Vue {
   transition: left 0.3s ease;
 }
 
-.chat-bubble img {
+.chat-bubble svg {
   width: 30px;
   height: 30px;
   user-select: none;

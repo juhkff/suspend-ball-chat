@@ -1,5 +1,5 @@
 const path = require('path');
-const { VueLoaderPlugin } = require("vue-loader");
+const {VueLoaderPlugin} = require("vue-loader");
 
 const basePath = path.resolve(__dirname)
 
@@ -8,7 +8,7 @@ module.exports = {
     entry: path.join(basePath, 'components', 'index.ts'),
     output: {
         path: path.resolve(__dirname, 'lib'),
-        publicPath: '/lib/',
+        publicPath: '',
         filename: 'index.js',  // 输出文件名
         library: 'suspend-ball-chat', // 组件库名称
         libraryTarget: 'umd',  //模块化格式
@@ -55,9 +55,8 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]',
+                    name: 'icons/[name].[ext]',
                     esModule: false,
-                    publicPath: './'
                 }
             },
             {
