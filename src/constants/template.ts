@@ -1,0 +1,1 @@
+export const THINKING_TEMPLATE = ['thinking', 'thinking.', 'thinking..', 'thinking...'];

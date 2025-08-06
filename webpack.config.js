@@ -8,7 +8,7 @@ module.exports = {
     entry: path.join(basePath, 'components', 'index.ts'),
     output: {
         path: path.resolve(__dirname, 'lib'),
-        publicPath: '',
+        publicPath: '/lib/',
         filename: 'index.js',  // 输出文件名
         library: 'suspend-ball-chat', // 组件库名称
         libraryTarget: 'umd',  //模块化格式

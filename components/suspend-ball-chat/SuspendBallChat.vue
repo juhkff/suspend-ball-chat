@@ -14,7 +14,7 @@
     <!-- 菜单 -->
     <div class="menu" v-if="isMenuVisible"
          :style="{ left: (menuLeft-10) + 'px', top: menuTop + 'px' }">
-      <chat-panel/>
+      <chat-panel :locales="locales" :options="options" :url="url"/>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@
 import Component from "vue-class-component";
 import Vue from "vue";
 import ChatPanel from "../chat-panel";
-import aiAssistantIcon from "@/icons/ai-assistant.svg"; // AI助手图标路径
+import {Prop} from "vue-property-decorator";
+import {DEFAULT_DATE_TIME_FORMAT} from "@/constants/dateFormats";
 
 @Component({
   name: "suspend-ball-chat",
@@ -32,6 +33,12 @@ import aiAssistantIcon from "@/icons/ai-assistant.svg"; // AI助手图标路径
   },
 })
 export default class SuspendBallChat extends Vue {
+  @Prop({type: [String, Array], default: 'zh-CN'}) readonly locales!: string | string[];
+  @Prop({
+    type: Object, default: () => DEFAULT_DATE_TIME_FORMAT
+  }) readonly options!: Intl.DateTimeFormatOptions;
+  @Prop({type: String, default: 'http://localhost:8081/api/chat/v1/completion'}) readonly url!: string;
+
   private ballLeft: number = window.innerWidth - 60; // 初始位置
   private ballTop: number = window.innerHeight - 60;
   private isDragging: boolean = false;

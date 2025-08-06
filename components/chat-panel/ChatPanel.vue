@@ -21,6 +21,7 @@ import 'element-ui/lib/theme-chalk/divider.css';
 import 'element-ui/lib/theme-chalk/input.css';
 import 'element-ui/lib/theme-chalk/row.css';
 import 'element-ui/lib/theme-chalk/col.css';
+import {THINKING_TEMPLATE} from "@/constants/template";
 
 @Component({
   name: 'chat-panel',
@@ -51,7 +52,7 @@ export default class ChatPanel extends Vue {
     }
   }
 
-  private inputValue: string = 'aa'
+  private inputValue: string = ''
   // uiHistory 提供UI界面展示数据. 因为存在一种情况：用户发送消息后，服务器返回错误，此时需要将用户消息和错误信息展示出来，但不存储到历史记录中
   private uiHistory: ChatMessage[] = []
   // 真正的历史记录
@@ -80,28 +81,24 @@ export default class ChatPanel extends Vue {
         message: inputValueCopy
       })
     })
-    // 要有先后顺序，UI的回复前处理必须先于请求结果处理
-    const uiPromise = new Promise<NodeJS.Timeout>(resolve => {
-      const thinkingTemplate = ['thinking', 'thinking.', 'thinking..', 'thinking...'];
-      let seconds = 0;
-      this.uiHistory.push({
-        role: 'user',
-        content: inputValueCopy,
-        timestamp: Date.now()
-      });
-      // 思考效果
-      this.uiHistory.push({
-        role: 'wait',
-        content: 'thinking...',
-        timestamp: -1,
-      });
-      // 定时器模拟思考时间
-      const timer = setInterval(() => {
-        this.uiHistory[this.uiHistory.length - 1].content = thinkingTemplate[seconds++ % thinkingTemplate.length];
-      }, 500);
-      resolve(timer);
+    this.uiHistory.push({
+      role: 'user',
+      content: inputValueCopy,
+      timestamp: Date.now()
     });
-    Promise.all([uiPromise, fetchPromise]).then(async ([timer, response]) => {
+    // 思考效果
+    this.uiHistory.push({
+      role: 'wait',
+      content: 'thinking...',
+      timestamp: -1,
+    });
+    const len = this.uiHistory.length;
+    let seconds = 0;
+    // 定时器模拟思考时间
+    const timer = setInterval(() => {
+      this.uiHistory[len - 1].content = THINKING_TEMPLATE[seconds++ % THINKING_TEMPLATE.length];
+    }, 500);
+    fetchPromise.then(async (response) => {
       // await new Promise(resolve => {
       //   setTimeout(resolve, 5000);
       // });
@@ -131,6 +128,8 @@ export default class ChatPanel extends Vue {
         });
       }
     }).catch(error => {
+      clearTimeout(timer);
+      this.uiHistory.pop();
       // this.$message.error(error.message);
       this.uiHistory.push({
         role: 'wait',

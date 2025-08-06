@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'lib'),
-        publicPath: '',
+        publicPath: '/lib/',
         filename: 'components/[name]/index.js',  // 输出文件名
         library: '[name]', // 组件库名称
         libraryTarget: 'umd',  //模块化格式
