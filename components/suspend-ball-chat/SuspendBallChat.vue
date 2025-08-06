@@ -32,7 +32,6 @@ import aiAssistantIcon from "@/icons/ai-assistant.svg"; // AI助手图标路径
   },
 })
 export default class SuspendBallChat extends Vue {
-  private aiAssistantIcon: string = aiAssistantIcon; // AI助手图标路径
   private ballLeft: number = window.innerWidth - 60; // 初始位置
   private ballTop: number = window.innerHeight - 60;
   private isDragging: boolean = false;

@@ -1,6 +1,6 @@
 {
-  "name": "suspend-ball-chat-ts",
-  "version": "2.0.13",
+  "name": "suspend-ball-chat",
+  "version": "1.0.0-alpha.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "webpack",
@@ -34,7 +34,6 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.21",
-    "suspend-ball-chat-ts": "^2.0.3",
     "vue": "^2.7.16",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
