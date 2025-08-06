@@ -1,5 +1,5 @@
 const path = require('path');
-const { VueLoaderPlugin } = require("vue-loader");
+const {VueLoaderPlugin} = require("vue-loader");
 
 const basePath = path.resolve(__dirname)
 
@@ -55,9 +55,8 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].[ext]',
+                    name: 'icons/[name].[ext]',
                     esModule: false,
-                    publicPath: './'
                 }
             },
             {

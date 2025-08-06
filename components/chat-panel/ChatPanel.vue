@@ -1,8 +1,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from "vue-property-decorator";
-import { DEFAULT_DATE_TIME_FORMAT } from "@/constants/dateFormats"
+import {Prop} from "vue-property-decorator";
+import {DEFAULT_DATE_TIME_FORMAT} from "@/constants/dateFormats"
 import _ from 'lodash';
 // 按需导入 Element UI 组件和样式
 import {
@@ -13,7 +13,7 @@ import {
   Row,
   Col,
 } from 'element-ui';
-import { ChatMessage } from 'types';
+import {ChatMessage} from 'types';
 // 按需导入样式
 import 'element-ui/lib/theme-chalk/button.css';
 import 'element-ui/lib/theme-chalk/card.css';
@@ -34,11 +34,11 @@ import 'element-ui/lib/theme-chalk/col.css';
   }
 })
 export default class ChatPanel extends Vue {
-  @Prop({ type: [String, Array], default: 'zh-CN' }) readonly locales!: string | string[];
+  @Prop({type: [String, Array], default: 'zh-CN'}) readonly locales!: string | string[];
   @Prop({
     type: Object, default: () => DEFAULT_DATE_TIME_FORMAT
   }) readonly options!: Intl.DateTimeFormatOptions;
-  @Prop({ type: String, default: 'http://localhost:8081/api/chat/v1/completion' }) readonly url!: string;
+  @Prop({type: String, default: 'http://localhost:8081/api/chat/v1/completion'}) readonly url!: string;
 
   constructor() {
     super();
@@ -102,9 +102,9 @@ export default class ChatPanel extends Vue {
       resolve(timer);
     });
     Promise.all([uiPromise, fetchPromise]).then(async ([timer, response]) => {
-      await new Promise(resolve => {
-        setTimeout(resolve, 5000);
-      });
+      // await new Promise(resolve => {
+      //   setTimeout(resolve, 5000);
+      // });
       clearTimeout(timer);
       this.uiHistory.pop();
       const data = await response.json();
@@ -152,9 +152,9 @@ export default class ChatPanel extends Vue {
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
       this.inputValue =
-        this.inputValue.substring(0, start) +
-        '\n' +
-        this.inputValue.substring(end);
+          this.inputValue.substring(0, start) +
+          '\n' +
+          this.inputValue.substring(end);
       this.$nextTick(() => {
         textarea.selectionStart = textarea.selectionEnd = start + 1;
       });
@@ -167,9 +167,9 @@ export default class ChatPanel extends Vue {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     this.inputValue =
-      this.inputValue.substring(0, start) +
-      '\t' +
-      this.inputValue.substring(end);
+        this.inputValue.substring(0, start) +
+        '\t' +
+        this.inputValue.substring(end);
     this.$nextTick(() => {
       textarea.selectionStart = textarea.selectionEnd = start + 1;
     });
@@ -184,23 +184,23 @@ export default class ChatPanel extends Vue {
       <el-col v-for="(item, index) in this.uiHistory" :key="index" :class="`card-col ${item.role}`">
         <el-card :class="`message-card ${item.role}`">
           <el-row v-if="item.role !== 'wait'" :class="`card-panel-timestamp ${item.role}`" type="flex"
-            v-text="new Date(item.timestamp).toLocaleString(locales, options)" />
-          <el-row :class="`message-content ${item.role}`" type="flex" justify="left" v-text="item.content" />
+                  v-text="new Date(item.timestamp).toLocaleString(locales, options)"/>
+          <el-row :class="`message-content ${item.role}`" type="flex" justify="start" v-text="item.content"/>
         </el-card>
       </el-col>
     </el-row>
-    <el-divider class="input-top-divider" />
+    <el-divider class="input-top-divider"/>
     <el-card class="input-card">
       <slot>
         <el-input type="textarea" autosize clearable resize="none" style="flex: 1" class="card-input"
-          placeholder="Type your message here..." @keydown.enter.native="onEnter" @keydown.tab.native="onTab"
-          v-model="inputValue" />
+                  placeholder="Type your message here..." @keydown.enter.native="onEnter" @keydown.tab.native="onTab"
+                  v-model="inputValue"/>
         <el-button @click="sendChatMessage" class="ball-chat-submit" circle="circle" size="small"
-          style="background: transparent; border: none;">
+                   style="background: transparent; border: none;">
           <!-- 发送箭头 SVG 图标 -->
           <svg style="width: 16px; height: 16px; display: flex; align-items: center;" viewBox="0 0 24 24"
-            fill="currentColor">
-            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+               fill="currentColor">
+            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
           </svg>
         </el-button>
       </slot>
@@ -214,6 +214,7 @@ export default class ChatPanel extends Vue {
   border-radius: 10px;
   padding: 2px;
   margin: 5px;
+  font-size: 14px;
 }
 
 .message-card ::v-deep .el-card__body {
@@ -221,13 +222,13 @@ export default class ChatPanel extends Vue {
 }
 
 .message-card.user {
-  margin-right: 15%;
+  margin-right: 5%;
 }
 
 .message-card.assistant,
 .message-card.wait {
   background-color: #4E8CFF;
-  margin-left: 15%;
+  margin-left: 5%;
 }
 
 .card-col {
@@ -246,7 +247,7 @@ export default class ChatPanel extends Vue {
 .card-panel-timestamp {
   margin-bottom: 5px;
   color: gray;
-  font-size: small;
+  font-size: 12px;
 }
 
 .card-panel-timestamp.user {
